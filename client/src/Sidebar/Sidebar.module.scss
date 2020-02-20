@@ -1,0 +1,10 @@
+.sidebar {
+  border-right: 1px solid #edf5f8;
+  display: flex;
+  flex-flow: column;
+  min-height: 420px;
+
+  .filler {
+    flex: 1 1;
+  }
+}

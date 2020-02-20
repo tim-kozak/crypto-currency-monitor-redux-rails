@@ -1,0 +1,102 @@
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0;
+
+  ul.assets {
+    li {
+      overflow: hidden;
+      height: 30px;
+      line-height: 30px;
+      margin: 0 0 2px;
+
+      div {
+        width: 25%;
+        text-align: right;
+        float: left;
+
+        span {
+          display: inline-block;
+          margin: 0 10px 0 0;
+          padding: 3px 6px;
+          text-align: right;
+          text-transform: uppercase;
+          font-size: 11px;
+          line-height: 14px;
+          background: #ccc;
+          border-radius: 2px;
+          color: #fff;
+        }
+      }
+
+      .amount {
+        display: inline-block;
+        margin: 0 10px 0 0;
+        padding: 3px 6px;
+        text-align: right;
+        text-transform: uppercase;
+        font-size: 14px;
+        line-height: 14px;
+        background: #ccc;
+        border-radius: 2px;
+        color: #fff;
+      }
+
+      input {
+        box-sizing: border-box;
+        height: 26px;
+        width: 44%;
+        margin: 0 10px 0 0;
+        text-align: center;
+        font-size: 16px;
+        line-height: 30px;
+        border: 1px solid transparent;
+        border-bottom: 1px solid #edf5f8;
+        color: #333;
+
+        &:hover {
+          border: 1px solid #edf5f8;
+        }
+      }
+      .value {
+        color: #888;
+        font-size: 14px;
+      }
+    }
+  }
+  ul.distribution {
+    display: flex;
+    height: 100%;
+
+    li:first-child {
+      border-right: 1px solid #ccc;
+    }
+    li {
+      width: 50%;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0px 20px;
+      margin: auto 0;
+
+      h5 {
+        margin: 0 0 6px;
+        font-size: 14px;
+        color: #999;
+      }
+      strong {
+        display: block;
+        margin: 0 0 6px;
+        font-size: 17px;
+        font-weight: bold;
+        color: #666;
+      }
+      span {
+        display: block;
+        color: #ccc;
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

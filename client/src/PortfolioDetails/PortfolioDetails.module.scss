@@ -1,0 +1,35 @@
+.content {
+  display: grid;
+  grid-template-columns: 5fr 2fr;
+  grid-gap: 0;
+
+  .details {
+    position: relative;
+    padding: 20px;
+    border-right: 1px solid #edf5f8;
+    background: radial-gradient(100% 100px at 50% 0,rgba(45,175,229,.15),#fff);
+
+
+    h2 {
+      position: absolute; top: 24px;
+      z-index: 1;
+      font-size: 20px;
+      span {
+        font-size: 12px;
+        color: #666;
+        text-transform: uppercase;
+      }
+    }
+
+    .distribution {
+      margin: 0px 0 0;
+    }
+  }
+  .overview {
+    padding: 24px 20px;
+
+    h2 {
+      font-size: 20px;
+    }
+  }
+}

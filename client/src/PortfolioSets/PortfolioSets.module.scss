@@ -1,0 +1,95 @@
+.portfolio_sets {
+  padding: 20px 0 0;
+
+  h4 {
+    margin: 0 0 6px 20px;
+    font-size: 13px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: #9ba2b0;
+  }
+  .add {
+    display: block;
+    float: right;
+    padding: 0 10px 0 0;
+    line-height: 24px;
+    font-size: 14px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 50%;
+    opacity: 0.6;
+    color: #9314ff;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+  ul {
+    li {
+      border-top: 1px solid #9ed9fe;
+
+      &.all {
+        a {
+          min-height: auto;
+          line-height: 22px;
+          //text-align: center;
+        }
+      }
+
+      a {
+        display: block;
+        overflow: hidden;
+        position: relative;
+        box-sizing: border-box;
+        min-height: 48px;
+        padding: 6px 30px 6px 20px;
+        color: #666;
+        background: #fff;
+
+        &.active {
+          color: #58508d;
+          font-weight: bold;
+          //background: linear-gradient(to right, rgba(0,164,46,0.15) 0%,rgba(255,255,255,0) 80%,rgba(255,255,255,0) 100%);
+          &:after {
+            //right: 6px;
+          }
+        }
+        &:after {
+          content: ' ';
+          position: absolute;
+          right: 10px; top: 0; bottom: 0;
+          width: 6px;
+          background: url("./img/arrow.png") no-repeat right center;
+          background-size: 6px auto;
+        }
+      }
+      h5 {
+        position: absolute;
+        top: 0; bottom: 0; left: 20px;
+        height: 16px;
+        margin: auto;
+        //font-weight: bold;
+      }
+      .info  {
+        float: right;
+        text-align: right;
+        font-size: 13px;
+        line-height: 18px;
+        color: #999;
+        span {
+          display: block;
+        }
+        .value {
+          strong {
+            color: #4aa23c;
+          }
+        }
+        .amount {
+          > strong {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
