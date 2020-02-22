@@ -9,14 +9,6 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, publicDir)
     },
-    devServer: {
-        contentBase: path.join(__dirname, publicDir),
-        port: 9000,
-        hot: true,
-        open: true,
-        compress: true,
-        historyApiFallback: true
-    },
     module: {
         rules: [
             {
@@ -60,7 +52,8 @@ module.exports = {
                     {
                         loader: 'sass-loader',
                         options: {
-                            sourceMap: isDevelopment
+                            sourceMap: isDevelopment,
+                            implementation: require('sass')
                         }
                     }
                 ]
