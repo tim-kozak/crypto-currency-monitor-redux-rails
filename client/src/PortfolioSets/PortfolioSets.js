@@ -14,7 +14,7 @@ export const PortfolioSets = (props) => {
             <ul>
                 <li className={s.all}>
                     <NavLink exact={true} to="/" activeClassName={s.active} onClick={()=> { handleSetSelection(null) }} >
-                        All assets
+                        <h5>All assets</h5>
                     </NavLink>
                 </li>
                 {
