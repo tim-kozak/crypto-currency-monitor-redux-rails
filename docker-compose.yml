@@ -1,0 +1,76 @@
+version: '3'
+
+services:
+  client-app:
+    build:
+      context: client
+      dockerfile: Dockerfile
+    container_name: monitor-client
+    restart: unless-stopped
+    depends_on:
+      - server-app
+    ports:
+      - '8080:80'
+    volumes:
+      - client-volume:/usr/share/nginx/html
+    networks:
+      - app-network
+
+  server-app:
+    build:
+      context: server
+      dockerfile: Dockerfile
+    container_name: monitor-server
+    restart: unless-stopped
+    depends_on:
+      - db
+      - redis
+    environment:
+      POSTGRES_DB: monitor
+      POSTGRES_USER: monitor-server
+      POSTGRES_PASSWORD: example
+    ports:
+      - '9090:80'
+    volumes:
+      - server-volume:/app
+    networks:
+      - app-network
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: monitor
+      POSTGRES_USER: monitor-server
+      POSTGRES_PASSWORD: example
+    volumes:
+      - db-volume:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  redis:
+    image: redis:5.0.7-alpine
+    env_file:
+      - .env
+    volumes:
+      - redis-volume:/data
+    ports:
+      - 6379:6379
+    command: redis-server --requirepass $WP_REDIS_PASSWORD
+    healthcheck:
+      test: redis-cli ping
+      interval: 1s
+      timeout: 3s
+      retries: 30
+    networks:
+      - app-network
+
+volumes:
+  client-volume:
+  server-volume:
+  db-volume:
+  redis-volume:
+
+networks:
+  app-network:
+    driver: bridge
