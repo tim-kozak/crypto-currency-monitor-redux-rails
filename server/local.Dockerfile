@@ -14,20 +14,18 @@ WORKDIR /tmp
 ADD Gemfile* ./
 
 RUN apk add --virtual build-deps build-base openssl postgresql-dev libc-dev linux-headers libxml2-dev libxslt-dev readline-dev && \
-    bundle install --jobs=2 && \
-    apk del build-deps \
-    rails webpacker:install
+    bundle install --jobs=3 && \
+    apk del build-deps
 
 # copy app folder into contaier
-RUN gem install bundler
-
 ENV APP_HOME /app
-COPY . $APP_HOME
+#!!!DEV ONLY--- COPY . $APP_HOME
 WORKDIR $APP_HOME
 
-# ENV setup
-ENV RAILS_ENV=development \
-    RACK_ENV=development
+# env variables setup
+ENV RAILS_ENV=production \
+    RACK_ENV=production \
+    RAILS_ROOT=$APP_HOME
 
 EXPOSE 80
 

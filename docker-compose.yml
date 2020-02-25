@@ -9,6 +9,8 @@ services:
     restart: unless-stopped
     depends_on:
       - server-app
+    env_file:
+      - .env
     ports:
       - '8080:80'
     volumes:
@@ -19,30 +21,26 @@ services:
   server-app:
     build:
       context: server
-      dockerfile: Dockerfile
+      dockerfile: local.Dockerfile
     container_name: monitor-server
     restart: unless-stopped
     depends_on:
       - db
       - redis
-    environment:
-      POSTGRES_DB: monitor
-      POSTGRES_USER: monitor-server
-      POSTGRES_PASSWORD: example
+    env_file:
+      - .env
     ports:
       - '9090:80'
     volumes:
-      - server-volume:/app
+      - ./server:/app #server-volume:/app
     networks:
       - app-network
 
   db:
-    image: postgres
+    image: postgres:12.2-alpine
     restart: always
-    environment:
-      POSTGRES_DB: monitor
-      POSTGRES_USER: monitor-server
-      POSTGRES_PASSWORD: example
+    env_file:
+      - .env
     volumes:
       - db-volume:/var/lib/postgresql/data
     networks:
@@ -56,7 +54,7 @@ services:
       - redis-volume:/data
     ports:
       - 6379:6379
-    command: redis-server --requirepass $WP_REDIS_PASSWORD
+    command: redis-server --requirepass $REDIS_PASSWORD
     healthcheck:
       test: redis-cli ping
       interval: 1s
