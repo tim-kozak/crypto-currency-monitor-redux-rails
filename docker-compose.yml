@@ -1,11 +1,11 @@
-version: '3'
+version: '3.5'
 
 services:
   client-app:
+    container_name: monitor-client
     build:
       context: client
       dockerfile: Dockerfile
-    container_name: monitor-client
     restart: unless-stopped
     depends_on:
       - server-app
@@ -19,20 +19,22 @@ services:
       - app-network
 
   server-app:
+    container_name: monitor-server
     build:
       context: server
       dockerfile: local.Dockerfile
-    container_name: monitor-server
+      args:
+        ENV: 'development'
     restart: unless-stopped
     depends_on:
       - db
-      - redis
     env_file:
       - .env
     ports:
       - '9090:80'
     volumes:
       - ./server:/app #server-volume:/app
+      - ./server/Docker/usr/.gemrc:/root/.gemrc
     networks:
       - app-network
 
@@ -43,23 +45,6 @@ services:
       - .env
     volumes:
       - db-volume:/var/lib/postgresql/data
-    networks:
-      - app-network
-
-  redis:
-    image: redis:5.0.7-alpine
-    env_file:
-      - .env
-    volumes:
-      - redis-volume:/data
-    ports:
-      - 6379:6379
-    command: redis-server --requirepass $REDIS_PASSWORD
-    healthcheck:
-      test: redis-cli ping
-      interval: 1s
-      timeout: 3s
-      retries: 30
     networks:
       - app-network
 

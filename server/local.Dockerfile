@@ -1,31 +1,29 @@
-# /path/to/app/Dockerfile
 FROM ruby:2.6.5-alpine3.9
+
+# env and arg variables setup
+ARG APP_HOME='/app'
+ARG ENV
+ENV RAILS_ENV=$ENV \
+    RACK_ENV=$ENV \
+    RAILS_ROOT=$APP_HOME
 
 # timezone setup
 RUN apk add --update tzdata && \
     cp /usr/share/zoneinfo/Europe/London /etc/localtime && \
     echo "Europe/London" > /etc/timezone
 
-# runtime-dependencies setup
-RUN apk add --update --virtual runtime-deps postgresql-client nodejs libffi-dev readline sqlite
-
 # building in tmp dir
 WORKDIR /tmp
 ADD Gemfile* ./
 
-RUN apk add --virtual build-deps build-base openssl postgresql-dev libc-dev linux-headers libxml2-dev libxslt-dev readline-dev && \
-    bundle install --jobs=3 && \
+RUN apk add --update --virtual runtime-deps postgresql-client nodejs libffi-dev readline sqlite && \
+    apk add --virtual build-deps build-base openssl postgresql-dev libc-dev linux-headers libxml2-dev libxslt-dev readline-dev && \
+    bundle install --jobs=4 && \
     apk del build-deps
 
-# copy app folder into contaier
-ENV APP_HOME /app
-#!!!DEV ONLY--- COPY . $APP_HOME
+# copy app folder into container
+#COPY . $APP_HOME //don't copy in dev mode
 WORKDIR $APP_HOME
-
-# env variables setup
-ENV RAILS_ENV=production \
-    RACK_ENV=production \
-    RAILS_ROOT=$APP_HOME
 
 EXPOSE 80
 
