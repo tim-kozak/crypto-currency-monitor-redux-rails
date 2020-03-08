@@ -10,15 +10,15 @@ ENV RAILS_ENV=$ENV \
 # timezone setup
 RUN apk add --update tzdata && \
     cp /usr/share/zoneinfo/Europe/London /etc/localtime && \
-    echo "Europe/London" > /etc/timezone
+    echo "Europe/London" > /etc/timezone && \
+    apk add --update --virtual runtime-deps postgresql-client nodejs libffi-dev readline sqlite && \
+    apk add --virtual build-deps build-base openssl postgresql-dev libc-dev linux-headers libxml2-dev libxslt-dev readline-dev && \
+    gem install bundler -v 2.1.4
 
 # building in tmp dir
 WORKDIR /tmp
 ADD Gemfile* ./
-
-RUN apk add --update --virtual runtime-deps postgresql-client nodejs libffi-dev readline sqlite && \
-    apk add --virtual build-deps build-base openssl postgresql-dev libc-dev linux-headers libxml2-dev libxslt-dev readline-dev && \
-    bundle install --jobs=4 && \
+RUN bundle install --jobs=4 && \
     apk del build-deps
 
 # copy app folder into container

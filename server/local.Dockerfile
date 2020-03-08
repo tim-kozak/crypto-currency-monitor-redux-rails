@@ -18,6 +18,7 @@ ADD Gemfile* ./
 
 RUN apk add --update --virtual runtime-deps postgresql-client nodejs libffi-dev readline sqlite && \
     apk add --virtual build-deps build-base openssl postgresql-dev libc-dev linux-headers libxml2-dev libxslt-dev readline-dev && \
+    gem install bundler -v 2.1.4 && \
     bundle install --jobs=4 && \
     apk del build-deps
 
