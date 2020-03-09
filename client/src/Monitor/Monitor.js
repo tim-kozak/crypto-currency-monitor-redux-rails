@@ -3,21 +3,15 @@ import s from './Monitor.module.scss'
 import { Sparklines, SparklinesBars,SparklinesLine } from 'react-sparklines';
 import {simplePrice} from "../utils/decorators";
 import {Loader} from "../common/Loader";
+import ColorHash from "color-hash"
 
-const colorScheme = [
-    {
-        color: "#336aff",
-        tint: "#d9f3fe"
-    },
-    {
-        color: "#ffc700",
-        tint: "#fff0b9"
-    },
-    {
-        color: "#ff6016",
-        tint: "#ffe7dc"
-    }
-];
+function color(index) {
+    return new ColorHash().hex(index);
+}
+
+function tint(index) {
+    return new ColorHash({lightness: 0.8}).hex(index);
+}
 
 export const Monitor = (props) => {
     const {currencies, isLoading} = props;
@@ -37,7 +31,7 @@ export const Monitor = (props) => {
                             </strong>
                             <div className={s.chart}>
                                 <Sparklines data={series} margin={0.5} height={30}>
-                                    <SparklinesLine style={{strokeWidth: 1, stroke: colorScheme[index].color, fill: colorScheme[index].tint, fillOpacity: "0.1"}}/>
+                                    <SparklinesLine style={{strokeWidth: 1, stroke: color(index), fill: tint(index), fillOpacity: "0.1"}}/>
                                 </Sparklines>
                             </div>
                          </div>)

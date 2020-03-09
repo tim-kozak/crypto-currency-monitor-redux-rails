@@ -4,7 +4,7 @@
   "description": "react + headless rails test project",
   "main": "index.js",
   "scripts": {
-    "start": "env NODE_ENV=development webpack-dev-server --watch --config ./webpack.config.dev.js",
+    "dev": "env NODE_ENV=development webpack-dev-server --watch --config ./webpack.config.dev.js",
     "prod": "env NODE_ENV=production webpack --config ./webpack.config.prod.js"
   },
   "author": "Tim Kozak",
@@ -16,6 +16,7 @@
     "axios": "^0.19.2",
     "babel-loader": "^8.0.6",
     "classnames": "^2.2.6",
+    "color-hash": "^1.0.3",
     "css-loader": "^3.4.2",
     "file-loader": "^5.0.2",
     "highcharts": "^8.0.0",

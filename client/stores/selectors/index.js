@@ -30,7 +30,7 @@ export const getOverallNetWorth = createSelector( [getCurrencies,getPortfolio], 
         const currentPortfolio = portfolio.byIds[id];
         let portfolioPrice = 0;
         currentPortfolio.assets.map((asset) => {
-            const assetPrice = currencies.byIds[asset.currencyId].price;
+            const assetPrice = currencies.byIds[asset.currency_id].price;
             const value = asset.amount;
             portfolioPrice += assetPrice * value;
         });
@@ -58,14 +58,14 @@ export const getGroupedAssetsPortfolio = createSelector( [getAllAssets], (allAss
         let innerAsset = null;
 
         grouped.assets.map(function (_asset) {
-           if (_asset.currencyId === asset.currencyId) {
+           if (_asset.currency_id === asset.currency_id) {
                innerAsset = _asset
            }
         });
 
         if (!innerAsset) {
             grouped.assets.push({
-                currencyId: asset.currencyId,
+                currency_id: asset.currency_id,
                 amount: asset.amount
             })
         } else {
@@ -86,7 +86,7 @@ export const getSelectedPortfolio = createSelector( [getPortfolio,getSelectedPor
 export const getSelectedPortfolioSetValue = createSelector( [getCurrencies,getPortfolio,getSelectedPortfolio], (currencies, portfolio, portfolioItem) => {
     let portfolioPrice = 0;
     portfolioItem.assets.map((asset) => {
-        const assetPrice = currencies.byIds[asset.currencyId].price;
+        const assetPrice = currencies.byIds[asset.currency_id].price;
         const value = asset.amount;
         portfolioPrice += assetPrice * value;
     });
@@ -98,7 +98,7 @@ export const getSelectedPortfolioSetValue = createSelector( [getCurrencies,getPo
  */
 export const getHighchartsGrouppedAssetsData = createSelector( [getSelectedPortfolio,getCurrencies], (selectedPortfolio, currencies) => {
     return selectedPortfolio.assets.map(asset => {
-        const currency = currencies.byIds[asset.currencyId];
+        const currency = currencies.byIds[asset.currency_id];
         const name = currency.name;
         const value = asset.amount * currency.price;
         return [name, value]
@@ -107,14 +107,14 @@ export const getHighchartsGrouppedAssetsData = createSelector( [getSelectedPortf
 
 export const getHighchartsPortfolioData = createSelector( [getCurrencies, getSelectedPortfolio], (currencies, selectedPortfolio) => {
     let longestHistory = 0;
-    let longestHistoryCurrencyId = 0;
+    let longestHistorycurrency_id = 0;
     let series = selectedPortfolio.assets.map((asset,index) => {
-        const currencyId = asset.currencyId;
-        const currency = currencies.byIds[currencyId];
+        const currency_id = asset.currency_id;
+        const currency = currencies.byIds[currency_id];
         const historical = currency.historical;
         if ( historical.length > longestHistory) {
             longestHistory = historical.length;
-            longestHistoryCurrencyId = currencyId;
+            longestHistorycurrency_id = currency_id;
         }
         return {
             name: currency.name,
@@ -127,8 +127,8 @@ export const getHighchartsPortfolioData = createSelector( [getCurrencies, getSel
     for (let i = 0; i<longestHistory; i++) {
         let dayValue = 0;
         selectedPortfolio.assets.map((asset) => {
-            const currencyId = asset.currencyId;
-            const historical = currencies.byIds[currencyId].historical;
+            const currency_id = asset.currency_id;
+            const historical = currencies.byIds[currency_id].historical;
             let backIndex = historical.length - i - 1;
 
             if (backIndex >= 0) {
@@ -137,7 +137,7 @@ export const getHighchartsPortfolioData = createSelector( [getCurrencies, getSel
             }
         });
         const largestBackIndex = longestHistory - 1 - i;
-        const time = currencies.byIds[longestHistoryCurrencyId].historical[largestBackIndex][0];
+        const time = currencies.byIds[longestHistorycurrency_id].historical[largestBackIndex][0];
         const day = [time, dayValue];
         valueSeriesData.unshift(day);
 

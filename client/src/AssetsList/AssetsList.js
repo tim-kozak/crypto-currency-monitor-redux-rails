@@ -20,7 +20,7 @@ export const AssetsList = (props) => {
         <div className={s.list}>
             <ul className={s.assets}>
                 {assets.map(function(asset,index) {
-                    const currency = currencies.byIds[asset.currencyId];
+                    const currency = currencies.byIds[asset.currency_id];
                     const assetName = currency.name;
                     const amount = simpleValue(asset ? asset.amount : 0, 3);
                     const value = simplePrice(currency.price * amount,1);

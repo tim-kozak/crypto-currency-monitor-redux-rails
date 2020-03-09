@@ -9,8 +9,6 @@ import {simplePrice} from "../utils/decorators";
 export const PortfolioChart = (props) => {
     const {data,yAxis} = props;
 
-    debugger;
-
     const options = {
         chart: {
             zoomType: 'x',

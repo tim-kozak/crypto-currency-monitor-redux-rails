@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {connect} from "react-redux";
 import {App} from "./App"
-import {fetchCurrenciesAndRatesThunk} from "../../stores/actions/actions";
+import {loginAndQueryAllDataThunk} from "../../stores/actions/actions";
 import {Loader} from "../common/Loader";
 
 
@@ -12,13 +12,13 @@ const mapStateToProps = (state) => {
     }
 };
 const mapDispatchToProps = {
-    getCurrencies: fetchCurrenciesAndRatesThunk
+    getTestData: loginAndQueryAllDataThunk
 };
 
 export const AppContainer = connect(mapStateToProps, mapDispatchToProps)((props) => {
-    const {getCurrencies,isLoading} = props;
+    const {getTestData,isLoading} = props;
     useEffect(() => {
-        getCurrencies();
+        getTestData();
     },[]);
 
     return <>{isLoading ? <Loader /> : <App />}</>;
