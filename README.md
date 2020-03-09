@@ -4,7 +4,7 @@ A comprehensive dashboard to track all your crypto investments and savings. <br/
 Overtime performance and current state of affairs.  
 *Link to [demo]()*
 
-![preview][client/sample.png]
+![preview](client/sample.png)
 
 ## Getting Started
 
