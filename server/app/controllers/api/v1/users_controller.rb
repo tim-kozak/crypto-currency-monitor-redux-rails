@@ -1,6 +1,12 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authorize_request, only: :create
 
+  # GET me
+  # return authenticated user
+  def me
+    render json: current_user, serializer: UserSerializer
+  end
+
   # POST /signup
   # return authenticated token upon signup
   def create

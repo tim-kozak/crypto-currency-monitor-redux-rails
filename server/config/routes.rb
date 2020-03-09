@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :assets
       post 'auth/login', to: 'authentication#authenticate'
       post 'users/signup', to: 'users#create'
+      get 'users/me', to: 'users#me'
     end
   end
 end

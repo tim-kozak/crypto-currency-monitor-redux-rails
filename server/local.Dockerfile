@@ -28,5 +28,6 @@ WORKDIR $APP_HOME
 
 EXPOSE 80
 
-# PUMA start
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+CMD rails db:migrate && \
+    rake db:seed && \
+    bundle exec puma -C config/puma.rb
