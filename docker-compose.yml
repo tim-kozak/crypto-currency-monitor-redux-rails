@@ -13,8 +13,6 @@ services:
       - .env
     ports:
       - '8080:80'
-    volumes:
-      - client-volume:/usr/share/nginx/html
     networks:
       - app-network
 
@@ -33,7 +31,6 @@ services:
     ports:
       - '9090:80'
     volumes:
-      - ./server:/app #server-volume:/app
       - ./server/Docker/usr/.gemrc:/root/.gemrc
     networks:
       - app-network
@@ -49,10 +46,7 @@ services:
       - app-network
 
 volumes:
-  client-volume:
-  server-volume:
   db-volume:
-  redis-volume:
 
 networks:
   app-network:
