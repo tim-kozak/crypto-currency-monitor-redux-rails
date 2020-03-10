@@ -2,13 +2,13 @@
 
 A comprehensive dashboard to track all your crypto investments and savings. <br/>
 Overtime performance and current state of affairs.  
-*Link to [demo]()*
+*Link to [demo](http://199.244.50.247:8080/)*
 
 ![preview](client/sample.png)
 
 ## Getting Started
 
-The project is made to showcase React-Redux application `/client` in combination with headless Ruby on Rails application `/server` as API. <br/>
+The project is made to showcase React-Redux application `/client` in combination with <br/>headless Ruby on Rails application `/server` as API. <br/>
 All dockerized and orchestrated with docker compose for effortless infrastructure management.<br/>
 API also integrates with [coinmarketcap](https://coinmarketcap.com/) to get the latest updates about asset values.
 
