@@ -2,7 +2,7 @@
 
 A comprehensive dashboard to track all your crypto investments and savings. <br/>
 Overtime performance and current state of affairs.  
-*Link to [demo]()*
+*Link to [demo](http://199.244.50.247:8080/)*
 
 ![preview](client/sample.png)
 

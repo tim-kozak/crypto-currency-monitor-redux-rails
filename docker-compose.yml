@@ -20,7 +20,7 @@ services:
     container_name: monitor-server
     build:
       context: server
-      dockerfile: local.Dockerfile
+      dockerfile: Dockerfile
       args:
         ENV: 'development'
     restart: unless-stopped
@@ -31,7 +31,7 @@ services:
     ports:
       - '9090:80'
     volumes:
-      - ./server:/app #server-volume:/app
+      - ./server:/app
       - ./server/Docker/usr/.gemrc:/root/.gemrc
     networks:
       - app-network
@@ -48,7 +48,6 @@ services:
 
 volumes:
   db-volume:
-  server-volume:
 
 networks:
   app-network:

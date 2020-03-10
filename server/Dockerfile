@@ -22,12 +22,12 @@ RUN apk add --update --virtual runtime-deps postgresql-client nodejs libffi-dev 
     bundle install --jobs=4 && \
     apk del build-deps
 
-# copy app folder into container
-COPY . $APP_HOME
 WORKDIR $APP_HOME
 
 EXPOSE 80
 
-CMD rails db:migrate && \
+CMD mkdir tmp && \
+    mkdir tmp/pids && \
+    rails db:migrate && \
     rake db:seed && \
     bundle exec puma -C config/puma.rb
