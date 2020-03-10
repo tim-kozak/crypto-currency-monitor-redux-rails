@@ -1,6 +1,6 @@
 export const Config = {
     api: {
-      host: "http://0.0.0.0:9090/api/v1"
+      host: "http://199.244.50.247:9090/api/v1"
     },
     testUser: {
         email: "test@test.com",
