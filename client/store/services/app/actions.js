@@ -19,3 +19,8 @@ export const setAppLoading = (isLoading) => ({
     type: actionTypes.SET_APP_LOADING,
     isLoading
 });
+
+export const setActivePortfolio = (portfolioId) => ({
+    type: actionTypes.SET_ACTIVE_PORTFOLIO,
+    portfolioId
+});

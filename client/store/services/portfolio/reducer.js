@@ -13,6 +13,15 @@ export const portfolioReducer = (state = {_allIds,_byIds}, action) => {
                 byIds
             };
 
+        case actionTypes.ADD_PORTFOLIO_DATA:
+            let newPortfolio = {};
+            newPortfolio[action.portfolio.id] = action.portfolio;
+            debugger;
+            return {
+                allIds: [...state.allIds, action.portfolio.id ],
+                byIds: {...state.byIds,  ...newPortfolio}
+            };
+
         default:
             return state;
     }

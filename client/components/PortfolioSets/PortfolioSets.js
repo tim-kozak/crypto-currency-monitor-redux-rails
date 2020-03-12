@@ -3,13 +3,13 @@ import s from './PortfolioSets.module.scss'
 import {NavLink} from "react-router-dom";
 
 export const PortfolioSets = (props) => {
-    const {portfolio} = props;
-    const {handleSetSelection} = props;
+    const {portfolio,selectedPortfolioId} = props;
+    const {handleSetSelection,handleAddPortfolio} = props;
 
     const portfolioIds = portfolio.allIds;
     return (
         <div className={s.portfolio_sets}>
-            <a className={s.add} href="#">+ Add Set</a>
+            <a className={s.add} href="#" onClick={()=> { handleAddPortfolio() }}>+ Add Set</a>
             <h4>Portfolio:</h4>
             <ul>
                 <li className={s.all}>
@@ -21,7 +21,7 @@ export const PortfolioSets = (props) => {
                     portfolioIds.map( portfolioId => {
                         const set = portfolio.byIds[portfolioId];
                         return (<li>
-                            <NavLink to={"/portfolio-set/"+portfolioId} activeClassName={s.active} onClick={()=> { handleSetSelection(portfolioId) }}>
+                            <NavLink to={"/portfolio-set/"+portfolioId} activeClassName={s.active} isActive={ () => (portfolioId == selectedPortfolioId) } onClick={()=> { handleSetSelection(portfolioId) }}>
                                 <h5>{set.name}</h5>
                                 <div className={s.info}>
                                     {/*TODO: here*/}
