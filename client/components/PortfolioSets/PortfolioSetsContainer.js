@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {PortfolioSets} from "./PortfolioSets";
-import {setActivePortfolio} from "../../store/dbl/portfolio/actions";
+import {setActivePortfolio} from "../../store/services/portfolio/actions";
 
 const mapStateToProps = (state) => {
     const {portfolio} = state;

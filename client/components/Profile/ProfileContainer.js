@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {Profile} from "./Profile";
-import {getAllAssets, getOverallNetWorth} from "../../store/dbl/selectors";
+import {getAllAssets, getOverallNetWorth} from "../../store/services/selectors";
 import {simplePrice} from "../../utils/decorators";
 
 const mapStateToProps = (state) => {

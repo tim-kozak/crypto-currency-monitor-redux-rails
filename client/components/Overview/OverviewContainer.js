@@ -1,6 +1,6 @@
 import {connect} from "react-redux/es/alternate-renderers";
 import React from 'react';
-import {getHighchartsGrouppedAssetsData} from "../../store/dbl/selectors";
+import {getHighchartsGrouppedAssetsData} from "../../store/services/selectors";
 import {Overview} from "./Overview";
 
 const mapStateToProps = (state) => {

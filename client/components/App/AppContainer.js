@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {connect} from "react-redux";
 import {App} from "./App"
-import {loginAndQueryAllDataThunk} from "../../store/dbl/app/actions";
+import {loginAndQueryAllDataThunk} from "../../store/services/app/actions";
 import {Loader} from "../common/Loader";
 
 

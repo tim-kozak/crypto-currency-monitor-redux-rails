@@ -1,7 +1,7 @@
 import React from "react"
 import {connect} from "react-redux";
 import {Monitor} from "./Monitor"
-import {getMonitorGroupedChartData} from "../../store/dbl/selectors";
+import {getMonitorGroupedChartData} from "../../store/services/selectors";
 
 const mapStateToProps = (state) => {
     const {currencies} = state;

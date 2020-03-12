@@ -5,7 +5,7 @@ import {
     getLastUpdatedDate,
     getSelectedPortfolio,
     getSelectedPortfolioSetValue
-} from "../../store/dbl/selectors";
+} from "../../store/services/selectors";
 import {simplePrice} from "../../utils/decorators";
 
 const mapStateToProps = (state) => {
