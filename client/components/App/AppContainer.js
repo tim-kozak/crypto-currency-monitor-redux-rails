@@ -6,7 +6,7 @@ import {Loader} from "../common/Loader";
 
 
 const mapStateToProps = (state) => {
-    const isLoading = state.currencies.isLoading;
+    const isLoading = state.appState.isLoading;
     return {
         isLoading
     }
