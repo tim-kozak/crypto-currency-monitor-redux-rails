@@ -8,6 +8,10 @@ export const getPortfolio = (state) => {
     return state.portfolio;
 };
 
+export const getPortfolioWithId = (state,props) => {
+    return state.portfolio.byIds[props.id];
+};
+
 export const getCurrencies = (state) => {
     return state.currencies;
 };
@@ -83,7 +87,17 @@ export const getSelectedPortfolio = createSelector( [getPortfolio,getSelectedPor
     return portfolio.byIds[id];
 });
 
-export const getSelectedPortfolioSetValue = createSelector( [getCurrencies,getPortfolio,getSelectedPortfolio], (currencies, portfolio, portfolioItem) => {
+export const getSelectedPortfolioSetValue = createSelector( [getCurrencies,getSelectedPortfolio], (currencies, portfolioItem) => {
+    let portfolioPrice = 0;
+    portfolioItem.assets.map((asset) => {
+        const assetPrice = currencies.byIds[asset.currency_id].price;
+        const value = asset.amount;
+        portfolioPrice += assetPrice * value;
+    });
+    return portfolioPrice;
+});
+
+export const getPortfolioSetValue =  createSelector( [getCurrencies,getPortfolioWithId], (currencies, portfolioItem) => {
     let portfolioPrice = 0;
     portfolioItem.assets.map((asset) => {
         const assetPrice = currencies.byIds[asset.currency_id].price;
