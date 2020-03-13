@@ -7,3 +7,7 @@ export const API = Axios.create({
         'Content-Type': 'application/json'
     }
 });
+
+export const setAuthToken = (token) => {
+    API.defaults.headers.common['Authorization'] = token;
+};

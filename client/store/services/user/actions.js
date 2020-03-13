@@ -1,6 +1,6 @@
 import actionTypes from "../actions";
 import {Config} from "../../../config/conf";
-import {API} from "../../../utils/api";
+import {API,setAuthToken} from "../../../utils/api";
 import {setPortfolioData} from "../portfolio/actions";
 
 export const setAuthLoading = (isLoading) => ({
@@ -22,7 +22,7 @@ export const fetchUserTokenThunk = () => {
         return API.post(url,data).then((tokenData) => {
 
             const token = tokenData.data.auth_token;
-            API.defaults.headers.common['Authorization'] = token;
+            setAuthToken(token);
 
             dispatch(setAuthData(token));
             dispatch(setAuthLoading(false));
