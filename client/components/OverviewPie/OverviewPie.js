@@ -28,11 +28,16 @@ export const OverviewPie = (props) => {
             pie: {
                 dataLabels: {
                     enabled: true,
-                    distance: -55,
+                    distance: -45,
                     style: {
                         fontWeight: 'bold',
                         color: 'white',
                         textOutline: "0px"
+                    },
+                    overflow: 'justify',
+                    crop: false,
+                    formatter: function () {
+                        return this.y > 5 ? this.point.name : null;
                     }
                 },
                 size: '100%',
@@ -42,7 +47,7 @@ export const OverviewPie = (props) => {
         series: [{
             type: 'pie',
             name: 'Assets share',
-            innerSize: '30%',
+            innerSize: '35%',
             data: data
         }]
     };
