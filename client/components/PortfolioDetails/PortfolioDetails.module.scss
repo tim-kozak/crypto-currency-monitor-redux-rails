@@ -5,7 +5,7 @@
 
   .details {
     position: relative;
-    padding: 53px 20px 20px;
+    padding: 60px 20px 30px;
     border-right: 1px solid #edf5f8;
     background: radial-gradient(100% 100px at 50% 0,rgba(45,175,229,.15),#fff);
 
@@ -14,10 +14,11 @@
     }
   }
   .overview {
-    padding: 24px 20px;
+    padding: 24px 0;
 
     h2 {
       font-size: 20px;
+      margin: 0 20px 20px;
     }
   }
 }

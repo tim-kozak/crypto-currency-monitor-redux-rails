@@ -1,7 +1,22 @@
 .list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 0;
+  padding: 20px 0;
+
+  .add {
+    cursor: pointer;
+    display: block;
+    padding: 10px 0 0;
+    line-height: 24px;
+    font-size: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 50%;
+    opacity: 0.6;
+    color: #9314ff;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 
   ul.assets {
     li {
@@ -11,7 +26,7 @@
       margin: 0 0 2px;
 
       div {
-        width: 45%;
+        width: 40%;
         text-align: right;
         float: left;
 
@@ -31,6 +46,7 @@
 
       .amount {
         display: inline-block;
+        cursor: pointer;
         margin: 0 10px 0 0;
         padding: 3px 6px;
         text-align: right;
@@ -61,41 +77,6 @@
       .value {
         color: #888;
         font-size: 14px;
-      }
-    }
-  }
-  ul.distribution {
-    display: flex;
-    height: 100%;
-
-    li:first-child {
-      border-right: 1px solid #ccc;
-    }
-    li {
-      width: 50%;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0px 20px;
-      margin: auto 0;
-
-      h5 {
-        margin: 0 0 6px;
-        font-size: 14px;
-        color: #999;
-      }
-      strong {
-        display: block;
-        margin: 0 0 6px;
-        font-size: 17px;
-        font-weight: bold;
-        color: #666;
-      }
-      span {
-        display: block;
-        color: #ccc;
-        font-size: 11px;
-        text-transform: uppercase;
       }
     }
   }

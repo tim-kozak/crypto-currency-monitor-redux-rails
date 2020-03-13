@@ -4,7 +4,7 @@ import {simpleDate, simplePrice, simpleValue} from "../../utils/decorators";
 import {COLORS} from "../../utils/colors";
 
 export const AssetsList = (props) => {
-    const {assets, currencies, value, lastUpdated, maxDay} = props;
+    const {assets, currencies, handleAddAsset} = props;
     const [state, setState] = useState({
         isEditing: false
     });
@@ -32,18 +32,7 @@ export const AssetsList = (props) => {
                             </li>);
                 })}
             </ul>
-            <ul className={s.distribution}>
-                <li>
-                    <h5>Current Set Value</h5>
-                    <strong>{value}</strong>
-                    <span>last updated: {lastUpdated}</span>
-                </li>
-                <li>
-                    <h5>Max possible value</h5>
-                    <strong>{simplePrice(maxDay.value)}</strong>
-                    <span>on: {simpleDate(maxDay.timestamp)}</span>
-                </li>
-            </ul>
+            <a className={s.add} onClick={()=> { handleAddAsset() }}>+ Add Asset</a>
         </div>
     );
 };

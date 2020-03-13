@@ -1,0 +1,37 @@
+.distribution {
+  display: flex;
+  height: 100%;
+  margin: 0 0 10px;
+
+  li:last-child {
+    border-right: 0;
+  }
+  li {
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0px 20px;
+    margin: auto 0;
+    border-right: 1px solid #ccc;
+
+    h5 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      color: #999;
+    }
+    strong {
+      display: block;
+      margin: 0 0 6px;
+      font-size: 17px;
+      font-weight: bold;
+      color: #666;
+    }
+    span {
+      display: block;
+      color: #ccc;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+  }
+}

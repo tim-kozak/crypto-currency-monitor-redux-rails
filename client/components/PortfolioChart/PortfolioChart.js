@@ -18,7 +18,8 @@ export const PortfolioChart = (props) => {
             spacingBottom: 0,
             spacingLeft: 0,
             plotBorderWidth: 0,
-            margin: [0,0,0,0]
+            margin: [0,0,0,0],
+            height: 500
         },
         rangeSelector: {
             buttons: [{

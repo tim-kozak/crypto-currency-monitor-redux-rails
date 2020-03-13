@@ -1,6 +1,7 @@
 import {connect} from "react-redux";
 import {PortfolioDetails} from "./PortfolioDetails";
 import {
+    getHighchartsGrouppedAssetsData,
     getHighchartsPortfolioData,
     getLastUpdatedDate,
     getSelectedPortfolio,
@@ -21,6 +22,7 @@ const mapStateToProps = (state) => {
         portfolioItem,
         portfolioValue,
         lastUpdated,
+        pieData: getHighchartsGrouppedAssetsData(state),
         yAxis,
         data,
         maxDay,
@@ -29,6 +31,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     handleUpdatePortfolioName: updatePortfolioNameThunk,
-    handleDeletePortfolio: deletePortfolioThunk
+    handleDeletePortfolio: deletePortfolioThunk,
+    handleAddAsset: () => {}
 };
 export const PortfolioDetailsContainer = connect(mapStateToProps,mapDispatchToProps)(PortfolioDetails);

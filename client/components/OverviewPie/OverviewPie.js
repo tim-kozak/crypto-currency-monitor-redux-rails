@@ -13,7 +13,8 @@ export const OverviewPie = (props) => {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: 0,
-            plotShadow: false
+            plotShadow: false,
+            height: 300
         },
         title: {
             text: null,
