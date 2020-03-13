@@ -7,6 +7,7 @@ import {
     getSelectedPortfolioSetValue
 } from "../../store/services/selectors";
 import {simplePrice} from "../../utils/decorators";
+import {updatePortfolioNameThunk} from "../../store/services/portfolio/actions";
 
 const mapStateToProps = (state) => {
     const portfolioItem = getSelectedPortfolio(state);
@@ -16,15 +17,17 @@ const mapStateToProps = (state) => {
     const [yAxis,data,maxDay] = getHighchartsPortfolioData(state);
 
     return {
-        isLoading: currencies.isLoading,
         currencies,
         portfolioItem,
         portfolioValue,
         lastUpdated,
         yAxis,
         data,
-        maxDay
+        maxDay,
     }
 };
 
-export const PortfolioDetailsContainer = connect(mapStateToProps)(PortfolioDetails);
+const mapDispatchToProps = {
+    handleUpdatePortfolioName: updatePortfolioNameThunk
+};
+export const PortfolioDetailsContainer = connect(mapStateToProps,mapDispatchToProps)(PortfolioDetails);

@@ -1,21 +1,25 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import s from './PortfolioDetails.module.scss'
 import {AssetsList} from "../AssetsList/AssetsList";
 import {PortfolioChart} from "../PortfolioChart/PortfolioChart";
 import {OverviewContainer} from "../Overview/OverviewContainer";
 import {Loader} from "../common/Loader";
+import {PortfolioHeader} from "./components/PortfolioHeader";
 
 export const PortfolioDetails = (props) => {
-    const {portfolioItem, currencies, yAxis, data, maxDay, portfolioValue,lastUpdated, isLoading} = props;
+    const {portfolioItem, currencies, yAxis, data, maxDay, portfolioValue,lastUpdated, handleUpdatePortfolioName} = props;
 
     const portfolioName = portfolioItem.name;
     const assets = portfolioItem.assets;
-    if (isLoading) return <Loader />;
+
+    const handleTitleChange = (newName) => {
+        handleUpdatePortfolioName(newName,portfolioItem.id);
+    };
 
     return (
         <div className={s.content}>
             <div className={s.details}>
-                <h2>{portfolioName} <span>Portfolio Assets</span></h2>
+                <PortfolioHeader title={portfolioName} subtitle="Portfolio Assets" canEdit={!!portfolioItem.id} handleTitleChange={handleTitleChange} />
                 <PortfolioChart data={data} yAxis={yAxis} />
                 <div className={s.distribution}>
                     <AssetsList assets={assets} currencies={currencies} value={portfolioValue} lastUpdated={lastUpdated} maxDay={maxDay} />
