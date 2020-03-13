@@ -2,7 +2,7 @@
 
 A comprehensive dashboard to track all your crypto investments and savings. <br/>
 Overtime performance and current state of affairs.  
-*Link to [demo](http://199.244.50.247:8080/)*
+>*Link to a [demo](http://199.244.50.247:8080/)*
 
 ![preview](client/sample.png)
 
@@ -36,17 +36,18 @@ $ git clone https://github.com/tim-kozak/redux-rails.git && cd redux-rails && do
 ## Tech stack
 
 Client:
-* Webpack - building, loading, running
-* React - view rendering
-* Redux - store management
-* redux-thunk - async actions
-* reselect - data processing
-* other: axios, moment, highcharts, react-sparklines, scss
+* [Webpack](https://webpack.js.org/) - building, loading, running
+* [React](https://reactjs.org/) - view rendering
+* [Redux](https://redux.js.org/) - store management
+* [redux-thunk](https://github.com/reduxjs/redux-thunk) - async actions
+* [react-router-dom](https://reacttraining.com/react-router/) - routing
+* [reselect](https://github.com/reduxjs/reselect) - data processing
+* other: css-modules, axios, moment, highcharts, react-sparklines, webpack-dev-server
 
 Server:
-* Ruby on rails - web framework in headless mode
-* JWT and bcrypt - for authentication 
-* active_model_serializers - models serializer
+* [Ruby on Rails](https://rubyonrails.org/) - web framework in headless mode
+* [JWT](https://uk.wikipedia.org/wiki/JSON_Web_Token) and [bcrypt](https://github.com/codahale/bcrypt-ruby) - for authentication 
+* [active_model_serializers](https://github.com/rails-api/active_model_serializers) - models serializer
 * rack-cors - Cross-Origin Resource Sharing settings
 * pg - PostgresSQL connector
 * seeds - demo data generation 
