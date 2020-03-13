@@ -16,10 +16,21 @@ export const portfolioReducer = (state = {_allIds,_byIds}, action) => {
         case actionTypes.ADD_PORTFOLIO_DATA:
             let newPortfolio = {};
             newPortfolio[action.portfolio.id] = action.portfolio;
-            debugger;
             return {
                 allIds: [...state.allIds, action.portfolio.id ],
                 byIds: {...state.byIds,  ...newPortfolio}
+            };
+        case actionTypes.SET_PORTFOLIO_ITEM_NAME:
+            if (!action.portfolioId) return state;
+
+            let updatedPortfolio = {};
+            updatedPortfolio[action.portfolioId] = {
+                ...state.byIds[action.portfolioId],
+                name: action.name
+            };
+            return {
+                ...state,
+                byIds: {...state.byIds,  ...updatedPortfolio}
             };
 
         default:

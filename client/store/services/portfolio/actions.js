@@ -17,6 +17,26 @@ export const addPortfolioData = (portfolio) => ({
     portfolio
 });
 
+export const setPortfolioItemName = (name,portfolioId) => ({
+    type: actionTypes.SET_PORTFOLIO_ITEM_NAME,
+    name,
+    portfolioId
+});
+
+export const updatePortfolioNameThunk = (name,portfolioId) => {
+    return (dispatch, getState) => {
+        const url = '/portfolios/' + portfolioId;
+        const data = { name: name };
+
+        dispatch(setPortfolioLoading(true));
+
+        return API.put(url,data).then((portfolioData) => {
+            dispatch(setPortfolioItemName(name,portfolioId));
+            dispatch(setPortfolioLoading(false));
+        });
+    };
+};
+
 export const createPortfolioThunk = () => {
     return (dispatch, getState) => {
         dispatch(setPortfolioLoading(true));
