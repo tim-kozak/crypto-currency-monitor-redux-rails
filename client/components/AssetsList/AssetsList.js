@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import s from './AssetsList.module.scss'
 import {simpleDate, simplePrice, simpleValue} from "../../utils/decorators";
+import {COLORS} from "../../utils/colors";
 
 export const AssetsList = (props) => {
     const {assets, currencies, value, lastUpdated, maxDay} = props;
-    const colorScheme = ["#ffa600", "#ff6361","#58508d"];
     const [state, setState] = useState({
         isEditing: false
     });
@@ -14,7 +14,6 @@ export const AssetsList = (props) => {
             isEditing: !state.isEditing
         })
     };
-
 
     return (
         <div className={s.list}>
@@ -26,7 +25,7 @@ export const AssetsList = (props) => {
                     const value = simplePrice(currency.price * amount,1);
                     return (<li>
                                 <div>
-                                    <span style={{ backgroundColor: colorScheme[index]}}>{assetName}:</span>
+                                    <span style={{ backgroundColor: COLORS[index]}}>{assetName}:</span>
                                 </div>
                                 {state.isEditing ? (<input type="text" value={amount}/>) : (<span className={s.amount} onClick={handleEdit}>{amount}</span>)}
                                 <strong className={s.value}>{value}</strong>

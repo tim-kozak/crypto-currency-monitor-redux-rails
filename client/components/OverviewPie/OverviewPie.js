@@ -3,6 +3,7 @@ import s from './OverviewPie.module.scss'
 import Highcharts from 'highcharts/highstock'
 import HighchartsReact from 'highcharts-react-official'
 import {simplePercentage, simplePrice} from "../../utils/decorators";
+import {COLORS} from "../../utils/colors";
 
 
 export const OverviewPie = (props) => {
@@ -35,7 +36,7 @@ export const OverviewPie = (props) => {
                     }
                 },
                 size: '100%',
-                colors: ["#ffa600", "#ff6361","#58508d"]
+                colors: COLORS
             }
         },
         series: [{
