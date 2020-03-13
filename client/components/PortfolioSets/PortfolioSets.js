@@ -10,7 +10,7 @@ export const PortfolioSets = (props) => {
     const portfolioIds = portfolio.allIds;
     return (
         <div className={s.portfolio_sets}>
-            <a className={s.add} href="#" onClick={()=> { handleAddPortfolio() }}>+ Add Set</a>
+            <a className={s.add} onClick={()=> { handleAddPortfolio() }}>+ Add Set</a>
             <h4>Portfolio:</h4>
             <ul>
                 <li className={s.all}>
@@ -21,7 +21,6 @@ export const PortfolioSets = (props) => {
                 {
                     portfolioIds.map( portfolioId => {
                         const set = portfolio.byIds[portfolioId];
-                        debugger;
                         const v = getPortfolioSetValue(portfolioId);
                         const value = simplePrice(v,1);
                         return (<li>

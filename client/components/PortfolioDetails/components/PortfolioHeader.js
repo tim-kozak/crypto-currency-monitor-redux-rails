@@ -3,7 +3,7 @@ import s from './PortfolioHeader.module.scss'
 import cn from 'classnames/bind';
 
 export const PortfolioHeader = (props) => {
-    const {title,subtitle,canEdit,handleTitleChange} = props;
+    const {title,subtitle,canEdit,handleTitleChange,handleDelete} = props;
 
     const [state,setState] = useState({
         isEditingName: false,
@@ -72,6 +72,7 @@ export const PortfolioHeader = (props) => {
                         <button type="submit">Save</button>
                     </form>)
             }
+            <a onClick={handleDelete} className={s.delete}>delete</a>
         </div>
     );
 };

@@ -23,6 +23,12 @@ export const setPortfolioItemName = (name,portfolioId) => ({
     portfolioId
 });
 
+export const deletePortfolioItem = (portfolioId) => ({
+    type: actionTypes.DELETE_PORTFOLIO_ITEM,
+    portfolioId
+});
+
+
 export const updatePortfolioNameThunk = (name,portfolioId) => {
     return (dispatch, getState) => {
         const url = '/portfolios/' + portfolioId;
@@ -48,6 +54,19 @@ export const createPortfolioThunk = () => {
             const newPortfolio = portfolioData.data;
             dispatch(addPortfolioData(newPortfolio));
             dispatch(setActivePortfolio(newPortfolio.id));
+            dispatch(setPortfolioLoading(false));
+        });
+    };
+};
+
+export const deletePortfolioThunk = (id) => {
+    return (dispatch, getState) => {
+        dispatch(setPortfolioLoading(true));
+        const url = '/portfolios/'+id;
+
+        return API.delete(url).then((portfolioData) => {
+            dispatch(deletePortfolioItem(id));
+            dispatch(setActivePortfolio(null));
             dispatch(setPortfolioLoading(false));
         });
     };

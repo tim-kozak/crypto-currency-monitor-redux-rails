@@ -7,7 +7,7 @@ import {
     getSelectedPortfolioSetValue
 } from "../../store/services/selectors";
 import {simplePrice} from "../../utils/decorators";
-import {updatePortfolioNameThunk} from "../../store/services/portfolio/actions";
+import {deletePortfolioThunk, updatePortfolioNameThunk} from "../../store/services/portfolio/actions";
 
 const mapStateToProps = (state) => {
     const portfolioItem = getSelectedPortfolio(state);
@@ -28,6 +28,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    handleUpdatePortfolioName: updatePortfolioNameThunk
+    handleUpdatePortfolioName: updatePortfolioNameThunk,
+    handleDeletePortfolio: deletePortfolioThunk
 };
 export const PortfolioDetailsContainer = connect(mapStateToProps,mapDispatchToProps)(PortfolioDetails);

@@ -30,7 +30,6 @@ export const fetchUserTokenThunk = () => {
     };
 };
 
-
 export const setUserLoading = (isLoading) => ({
     type: actionTypes.SET_USER_LOADING,
     isLoading

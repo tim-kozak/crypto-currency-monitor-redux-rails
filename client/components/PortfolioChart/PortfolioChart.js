@@ -12,7 +12,13 @@ export const PortfolioChart = (props) => {
     const options = {
         chart: {
             zoomType: 'x',
-            backgroundColor: 'transparent'
+            backgroundColor: 'transparent',
+            spacingTop: 0,
+            spacingRight: 0,
+            spacingBottom: 0,
+            spacingLeft: 0,
+            plotBorderWidth: 0,
+            margin: [0,0,0,0]
         },
         rangeSelector: {
             buttons: [{
