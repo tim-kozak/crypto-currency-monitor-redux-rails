@@ -24,4 +24,29 @@ const dev = {
     }
 };
 
-export const Config = process.env.NODE_ENV === 'development' ? dev : prod;
+const local = {
+    api: {
+        HOST: "http://0.0.0.0:3000/api/v1"
+    },
+    testUser: {
+        email: "test@test.com",
+        password: "test"
+    },
+    routes: {
+
+    }
+};
+
+export const Config = (() => {
+    switch (process.env.NODE_ENV) {
+        case 'development': {
+            return dev;
+        }
+        case 'production': {
+            return prod;
+        }
+        case 'none': {
+            return local;
+        }
+    }
+})();

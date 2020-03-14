@@ -4,8 +4,9 @@
   "description": "react + headless rails test project",
   "main": "index.js",
   "scripts": {
-    "dev": "env NODE_ENV=development webpack-dev-server --watch --config ./webpack.config.dev.js",
-    "prod": "env NODE_ENV=production webpack --config ./webpack.config.prod.js"
+    "local": "webpack-dev-server --watch --config ./webpack.config.local.js",
+    "dev": "webpack-dev-server --watch --config ./webpack.config.dev.js",
+    "prod": "webpack --config ./webpack.config.prod.js"
   },
   "author": "Tim Kozak",
   "license": "ISC",
