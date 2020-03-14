@@ -1,23 +1,6 @@
 .list {
   padding: 20px 0;
 
-  .add {
-    cursor: pointer;
-    display: block;
-    padding: 10px 0 0;
-    line-height: 24px;
-    font-size: 15px;
-    box-sizing: border-box;
-    text-align: center;
-    border-radius: 50%;
-    opacity: 0.6;
-    color: #9314ff;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
   ul.assets {
     li {
       overflow: hidden;
@@ -68,7 +51,13 @@
           background: #ccc;
           border-radius: 2px;
           color: #fff;
+          &:hover {
+            &:after {
+              opacity: 1;
+            }
+          }
           &:after {
+            opacity: 0.5;
             content: ' ';
             position: absolute;
             top: 0px;

@@ -2,12 +2,13 @@ import React,{useState,useEffect} from 'react';
 import s from './PortfolioDetails.module.scss'
 import {AssetsList} from "../AssetsList/AssetsList";
 import {PortfolioChart} from "../PortfolioChart/PortfolioChart";
-import {PortfolioHeader} from "./components/PortfolioHeader";
+import {PortfolioHeader} from "../PortfolioHeader/PortfolioHeader";
 import {AssetsPerformance} from "../AssetsPerformance/AssetsPerformance";
 import {OverviewPie} from "../OverviewPie/OverviewPie";
 
 export const PortfolioDetails = (props) => {
-    const {portfolioItem, currencies, yAxis, data, pieData, maxDay, portfolioValue,lastUpdated, handleUpdatePortfolioName,handleDeletePortfolio,handleAddAsset} = props;
+    const {portfolioItem, currencies, yAxis, data, pieData, maxDay, portfolioValue,lastUpdated} = props;
+    const {handleUpdatePortfolioName,handleDeletePortfolio,handleAddAsset} = props;
 
     const portfolioName = portfolioItem.name;
     const portfolioId = portfolioItem.id;
@@ -37,7 +38,9 @@ export const PortfolioDetails = (props) => {
                         <OverviewPie data={pieData}/>
                     </div>
                     <div className="distribution">
-                        <AssetsList assets={assets} currencies={currencies} handleAddAsset={handleAddAsset} />
+                        <AssetsList assets={assets} currencies={currencies} canEdit={!!portfolioId} handleAddAsset={(amount,currencyId) => {
+                            handleAddAsset(amount,currencyId,portfolioId)
+                        }} />
                     </div>
                 </div>
             </div>

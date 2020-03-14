@@ -4,7 +4,7 @@ import {remapToAllIds} from "../../../utils/processors";
 const [_allIds,_byIds] = remapToAllIds([]);
 
 
-export const portfolioReducer = (state = {_allIds,_byIds}, action) => {
+export const portfolioReducer = (state = {allIds:_allIds,byIds:_byIds}, action) => {
     switch (action.type) {
         case actionTypes.SET_PORTFOLIO_DATA: {
             const [allIds,byIds] = remapToAllIds(action.portfolios);
@@ -39,6 +39,17 @@ export const portfolioReducer = (state = {_allIds,_byIds}, action) => {
             return {
                 ...state,
                 byIds: {...state.byIds, ...updatedPortfolio}
+            };
+        }
+        case actionTypes.ADD_ASSET_ITEM: {
+            const asset = action.asset;
+            const portfolio = state.byIds[asset.portfolio_id];
+            portfolio.assets.push(asset);
+            let newPortfolio = {};
+            newPortfolio[portfolio.id] = {...portfolio};
+            return {
+                ...state,
+                byIds: {...state.byIds, ...newPortfolio}
             };
         }
         default:

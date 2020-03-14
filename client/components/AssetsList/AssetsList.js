@@ -2,23 +2,18 @@ import React, {useState} from 'react';
 import s from './AssetsList.module.scss'
 import {simpleDate, simplePrice, simpleValue} from "../../utils/decorators";
 import {COLORS} from "../../utils/colors";
+import {AddAsset} from "../AddAsset/AddAsset";
 
 export const AssetsList = (props) => {
-    const {assets, currencies, handleAddAsset} = props;
+    const {assets, currencies, canEdit} = props;
+    const {handleAddAsset} = props;
     const [state, setState] = useState({
         isEditing: false,
-        isAdding: false
     });
 
     const handleEdit = () => {
         setState({
             isEditing: !state.isEditing
-        })
-    };
-
-    const handleAdd = () => {
-        setState({
-            isAdding: !state.isAdding
         })
     };
 
@@ -44,18 +39,7 @@ export const AssetsList = (props) => {
                             </li>);
                 })}
             </ul>
-            { state.isAdding ? (
-                <form>
-                    <select name="" id="">
-                        <option value='1' />
-                    </select>
-                    <input />
-                    <button type="cancel">Cancel</button>
-                    <button type="submit">Save</button>
-                </form>
-            ) : (
-                <a className={s.add} onClick={handleAdd}>+ Add Asset</a>
-            )}
+            { canEdit ? <AddAsset handleAddAsset={handleAddAsset} currencies={currencies}/> : null }
         </div>
     );
 };

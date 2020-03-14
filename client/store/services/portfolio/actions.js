@@ -28,6 +28,11 @@ export const deletePortfolioItem = (portfolioId) => ({
     portfolioId
 });
 
+export const addAssetItem = (asset) => ({
+    type: actionTypes.ADD_ASSET_ITEM,
+    asset
+});
+
 
 export const updatePortfolioNameThunk = (name,portfolioId) => {
     return (dispatch, getState) => {
@@ -67,6 +72,23 @@ export const deletePortfolioThunk = (id) => {
         return API.delete(url).then((portfolioData) => {
             dispatch(deletePortfolioItem(id));
             dispatch(setActivePortfolio(null));
+            dispatch(setPortfolioLoading(false));
+        });
+    };
+};
+
+export const createAssetThunk = (amount,currencyId,portfolioId) => {
+    return (dispatch, getState) => {
+        dispatch(setPortfolioLoading(true));
+        const url = '/assets/';
+        const data = {
+            portfolio_id: portfolioId,
+            currency_id: currencyId,
+            amount: amount,
+        };
+        return API.post(url,data).then((assetData) => {
+            const asset = assetData.data;
+            dispatch(addAssetItem(asset));
             dispatch(setPortfolioLoading(false));
         });
     };
