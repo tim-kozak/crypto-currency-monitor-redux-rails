@@ -15,10 +15,10 @@ else
 end
 
 if Currency.all.size === 0
-  currencies = (1..5).map do
-    name = Faker::CryptoCoin.coin_name
-    symbol = Faker::CryptoCoin.acronym
-    price = Faker::Number.positive
+  currencies = (1..3).map do
+    name = Faker::CryptoCoin.unique.coin_name
+    symbol = Faker::CryptoCoin.unique.acronym
+    price = Faker::Number.decimal(l_digits: 3, r_digits: 4)
     last_change = Faker::Date.between(from: DateTime.now - 1, to: DateTime.now)
 
     Currency.create!(name: name, symbol: symbol, price: price, last_change: last_change )
@@ -26,11 +26,11 @@ if Currency.all.size === 0
   puts "Currencies created"
 
   3.times do
-    name = Faker::Superhero.name
+    name = Faker::Superhero.unique.name
     portfolio = Portfolio.create!(name:name, user: user)
 
-    4.times do
-      amount = Faker::Number.decimal(l_digits: 3, r_digits: 3)
+    rand(3).times do
+      amount = Faker::Number.decimal(l_digits: 2, r_digits: 4)
       Asset.create!(amount:amount, currency: currencies.sample, portfolio: portfolio)
     end
   end
