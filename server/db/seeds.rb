@@ -15,14 +15,18 @@ else
 end
 
 if Currency.all.size === 0
-  currencies = (1..3).map do
-    name = Faker::CryptoCoin.unique.coin_name
-    symbol = Faker::CryptoCoin.unique.acronym
+  demo = [["Bitcoin","BTC"], ["Ethereum", "ETH"], ["USD Coin", "USDC"]]
+  currencies = (1..3).map.with_index do |item,index|
+    name = demo[index][0]
+    symbol = demo[index][1]
+    #name = Faker::CryptoCoin.unique.coin_name
+    # symbol = Faker::CryptoCoin.unique.acronym
     price = Faker::Number.decimal(l_digits: 3, r_digits: 4)
     last_change = Faker::Date.between(from: DateTime.now - 1, to: DateTime.now)
 
     Currency.create!(name: name, symbol: symbol, price: price, last_change: last_change )
   end
+
   puts "Currencies created"
 
   3.times do
