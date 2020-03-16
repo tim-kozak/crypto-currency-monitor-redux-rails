@@ -7,7 +7,7 @@ import {AssetsPerformance} from "../AssetsPerformance/AssetsPerformance";
 import {OverviewPie} from "../OverviewPie/OverviewPie";
 
 export const PortfolioDetails = (props) => {
-    const {portfolioItem, currencies, yAxis, data, pieData, maxDay, portfolioValue,lastUpdated} = props;
+    const {portfolioItem, currencies, yAxis, data, pieData, maxDay, minDay, portfolioValue,lastUpdated} = props;
     const {handleUpdatePortfolioName,handleDeletePortfolio,handleAddAsset} = props;
 
     const portfolioName = portfolioItem.name;
@@ -29,7 +29,7 @@ export const PortfolioDetails = (props) => {
                     handleDelete={ ()=>handleDeletePortfolio(portfolioId) }
                 />
                 <PortfolioChart data={data} yAxis={yAxis} />
-                <AssetsPerformance value={portfolioValue} lastUpdated={lastUpdated} maxDay={maxDay} />
+                <AssetsPerformance value={portfolioValue} lastUpdated={lastUpdated} maxDay={maxDay} minDay={minDay} />
             </div>
             <div className={s.overview}>
                 <h2>Assets distribution</h2>

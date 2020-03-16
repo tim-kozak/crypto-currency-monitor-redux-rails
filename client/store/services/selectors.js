@@ -137,6 +137,7 @@ export const getHighchartsPortfolioData = createSelector( [getCurrencies, getSel
     });
 
     let maxSeriesDay = [0,0];
+    let minSeriesDay = [0,0];
     let valueSeriesData = [];
     for (let i = 0; i<longestHistory; i++) {
         let dayValue = 0;
@@ -156,6 +157,7 @@ export const getHighchartsPortfolioData = createSelector( [getCurrencies, getSel
         valueSeriesData.unshift(day);
 
         if (day[1] > maxSeriesDay[1]) maxSeriesDay = day;
+        if (minSeriesDay[0] == 0 || day[1] < minSeriesDay[1]) minSeriesDay = day;
     }
 
     const valueSeries = {
@@ -174,7 +176,7 @@ export const getHighchartsPortfolioData = createSelector( [getCurrencies, getSel
             opposite: opposite
         }
     });
-    return [yAxis, series,{ timestamp: maxSeriesDay[0], value: maxSeriesDay[1] } ];
+    return [yAxis, series,{ timestamp: maxSeriesDay[0], value: maxSeriesDay[1] },{ timestamp: minSeriesDay[0], value: minSeriesDay[1] } ];
 });
 
 export const getMonitorGroupedChartData = createSelector( [getCurrencies], (currencies) => {

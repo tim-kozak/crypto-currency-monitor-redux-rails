@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
     const portfolioValue = simplePrice(getSelectedPortfolioSetValue(state),1);
     const lastUpdated = getLastUpdatedDate(state);
     const {currencies} = state;
-    const [yAxis,data,maxDay] = getHighchartsPortfolioData(state);
+    const [yAxis,data,maxDay,minDay] = getHighchartsPortfolioData(state);
 
     return {
         currencies,
@@ -26,6 +26,7 @@ const mapStateToProps = (state) => {
         yAxis,
         data,
         maxDay,
+        minDay
     }
 };
 
