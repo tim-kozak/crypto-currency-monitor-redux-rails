@@ -7,18 +7,12 @@ class AuthenticateUser
 
   # Service entry point
   def call
-    JsonWebToken.encode(user_id: user.id) if user
-  end
-
-  private
-
-  # verify user credentials
-  def user
-    result = FindUserByEmail.call( email: @email )
+    result = AuthenticationOrganizer.call( email: @email, password: @password )
     if result.success?
-      user_obj = result.user
-      return user_obj if user_obj.authenticate(@password)
+      return result.auth_token
+    else
+      raise(ExceptionHandler::AuthenticationError, Message.invalid_credentials)
     end
-    raise(ExceptionHandler::AuthenticationError, Message.invalid_credentials)
   end
+
 end

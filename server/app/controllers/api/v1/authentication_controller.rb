@@ -3,8 +3,14 @@ class Api::V1::AuthenticationController < ApplicationController
 
   # return auth token once user is authenticated
   def authenticate
-    auth_token = AuthenticateUser.new(auth_params[:email], auth_params[:password]).call
-    json_response(auth_token: auth_token)
+    email = auth_params[:email]
+    password = auth_params[:password]
+    result = AuthenticationOrganizer.call( email: email, password: password )
+    if result.success?
+      json_response(auth_token: result.auth_token)
+    else
+      raise(ExceptionHandler::AuthenticationError, Message.invalid_credentials)
+    end
   end
 
   private

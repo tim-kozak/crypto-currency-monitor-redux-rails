@@ -10,11 +10,14 @@ class Api::V1::UsersController < ApplicationController
   # POST /signup
   # return authenticated token upon signup
   def create
-    result = CreateUser.call( create_params: user_params )
-    if result.success?
-      user = result.user
-      auth_token = AuthenticateUser.new(user.email, user.password).call
-      response = { message: Message.account_created, auth_token: auth_token }
+    user_creation = CreateUser.call( create_params: user_params )
+    user = nil
+    if user_creation.success?
+      user = user_creation.user
+    end
+    authentication = AuthenticationOrganizer.call( email: user.email, password: user.password )
+    if authentication.success?
+      response = { message: Message.account_created, auth_token: authentication.auth_token }
       json_response(response, :created)
     end
   end
