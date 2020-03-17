@@ -26,6 +26,7 @@ services:
     restart: unless-stopped
     depends_on:
       - db
+      - redis
     env_file:
       - .env
     ports:
@@ -33,9 +34,26 @@ services:
     volumes:
       - ./server:/app
       - ./server/Docker/usr/.gemrc:/root/.gemrc
+      - gems-cache:/usr/local/bundle/gems
     networks:
       - app-network
-
+  sidekiq:
+    container_name: sidekiq-worker
+    build:
+      context: server
+      dockerfile: sidekiq.Dockerfile
+      args:
+        ENV: 'development'
+    restart: unless-stopped
+    depends_on:
+      - db
+      - redis    
+    env_file: .env
+    volumes:
+      - ./server:/app
+      - gems-cache:/usr/local/bundle/gems
+    networks:
+      - app-network
   db:
     image: postgres:12.2-alpine
     restart: always
@@ -45,10 +63,17 @@ services:
       - db-volume:/var/lib/postgresql/data
     networks:
       - app-network
+  redis:
+    image: redis:5.0.8-alpine
+    volumes:
+      - redis-volume:/data
+    networks:
+      - app-network
 
 volumes:
   db-volume:
-
+  redis-volume:
+  gems-cache:
 networks:
   app-network:
     driver: bridge
