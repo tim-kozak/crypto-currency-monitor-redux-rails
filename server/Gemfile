@@ -19,8 +19,8 @@ gem 'active_model_serializers', '~> 0.10.10'
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 gem 'jwt', '~> 2.2', '>= 2.2.1'
 
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+# Service Objects pattern
+gem 'interactor', '~> 3.1', '>= 3.1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '~> 1.4', '>= 1.4.6'
