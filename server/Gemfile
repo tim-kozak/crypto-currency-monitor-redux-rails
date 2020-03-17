@@ -40,10 +40,10 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 4.0.0.beta4'
   gem 'rswag'
+  gem 'rails-controller-testing'
   gem 'shoulda'
   gem 'shoulda-matchers'
-  gem 'rails-controller-testing'
-  gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1', :require => false
+  gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
   gem 'faker'
   gem 'database_cleaner'
 end

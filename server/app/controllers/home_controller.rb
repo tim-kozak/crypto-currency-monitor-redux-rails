@@ -1,7 +1,6 @@
-class HomeController < ApplicationController
-  skip_before_action :authorize_request, only: :index
+class HomeController < ActionController::Base
 
   def index
-    render "home/index"
+    render "index"
   end
 end
