@@ -5,7 +5,7 @@ class Api::V1::AuthenticationController < ApplicationController
   def authenticate
     email = auth_params[:email]
     password = auth_params[:password]
-    result = AuthenticationOrganizer.call( email: email, password: password )
+    result = AuthenticationOrganizer.call( { email: email, password: password })
     if result.success?
       json_response(auth_token: result.auth_token)
     else

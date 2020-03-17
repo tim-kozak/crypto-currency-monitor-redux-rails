@@ -10,7 +10,11 @@ class ApplicationController < ActionController::API
 
   # Check for valid request token and return user
   def authorize_request
-    @current_user = (AuthorizeApiRequest.new(request.headers).call)[:user]
+    result = AuthorizationOrganizer.call({ headers: request.headers })
+    if result.success?
+      @current_user = result.user
+    else
+      raise(ExceptionHandler::MissingToken, Message.missing_token)
+    end
   end
-
 end
