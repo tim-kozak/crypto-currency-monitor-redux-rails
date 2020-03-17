@@ -4,15 +4,19 @@ class Api::V1::PortfoliosController < ApplicationController
 
   # GET /api/v1/portfolios
   def index
-    @portfolios = current_user.portfolios
-    json_response(@portfolios)
+    result = GetPortfolios.call()
+    if result.success?
+      json_response(result.portfolios)
+    end
   end
 
   # POST /api/v1/portfolios
   def create
     # create portfolio belonging to current user
-    @portfolio = current_user.portfolios.create!(portfolio_params)
-    json_response(@portfolio, :created)
+    result = CreatePortfolio.call({ user: current_user, create_params: portfolio_params})
+    if result.success?
+      json_response(result.portfolio, :created)
+    end
   end
 
   # GET /api/v1/portfolios/:id
@@ -22,13 +26,17 @@ class Api::V1::PortfoliosController < ApplicationController
 
   # PUT /api/v1/portfolios/:id
   def update
-    @portfolio.update(portfolio_params)
-    head :no_content
+    result = UpdatePortfolio.call({ portfolio: @portfolio, update_params: portfolio_params})
+    if result.success?
+      head :no_content
+    end
   end
 
   def destroy
-    @portfolio.destroy
-    head :no_content
+    result = DestroyPortfolio.call({ portfolio: @portfolio })
+    if result.success?
+      head :no_content
+    end
   end
 
   private
@@ -38,7 +46,10 @@ class Api::V1::PortfoliosController < ApplicationController
   end
 
   def set_portfolio
-    @portfolio = Portfolio.find(params[:id])
+    result = FindPortfolio.call({ id: params[:id] })
+    if result.success?
+      @portfolio = result.portfolio
+    end
   end
 
 end
