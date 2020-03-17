@@ -4,14 +4,18 @@ class Api::V1::CurrenciesController < ApplicationController
 
   # GET /api/v1/currencies
   def index
-    @currencies = Currency.all
-    json_response(@currencies)
+    result = GetCurrencies.call()
+    if result.success?
+      json_response(result.currencies)
+    end
   end
 
   # POST /api/v1/currencies
   def create
-    @currency = Currency.create!(currency_params)
-    json_response(@currency, :created)
+    result = CreateCurrency.call({ create_params: currency_params})
+    if result.success?
+      json_response(result.currency, :created)
+    end
   end
 
   # GET /api/v1/currencies/:id
@@ -21,13 +25,17 @@ class Api::V1::CurrenciesController < ApplicationController
 
   # PUT /api/v1/currencies/:id
   def update
-    @currency.update(currency_params)
-    head :no_content
+    result = UpdateCurrency.call({ currency: @currency, update_params: currency_params})
+    if result.success?
+      head :no_content
+    end
   end
 
   def destroy
-    @currency.destroy
-    head :no_content
+    result = DestroyCurrency.call({ currency: @currency })
+    if result.success?
+      head :no_content
+    end
   end
 
   private
@@ -38,6 +46,9 @@ class Api::V1::CurrenciesController < ApplicationController
   end
 
   def set_currency
-    @currency = Currency.find(params[:id])
+    result = FindCurrency.call({ id: params[:id] })
+    if result.success?
+      @currency = result.currency
+    end
   end
 end
