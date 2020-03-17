@@ -46,8 +46,9 @@ Client:
 
 Server:
 * [Ruby on Rails](https://rubyonrails.org/) - web framework in headless mode
-* [JWT](https://uk.wikipedia.org/wiki/JSON_Web_Token) and [bcrypt](https://github.com/codahale/bcrypt-ruby) - for authentication 
 * [Interactor](https://github.com/collectiveidea/interactor) - service objects pattern
+* [Sidekiq](https://github.com/mperham/sidekiq) - backgroud jobs
+* [JWT](https://uk.wikipedia.org/wiki/JSON_Web_Token) and [bcrypt](https://github.com/codahale/bcrypt-ruby) - for authentication 
 * [active_model_serializers](https://github.com/rails-api/active_model_serializers) - models serializer
 * rack-cors - Cross-Origin Resource Sharing settings
 * pg - PostgresSQL connector
