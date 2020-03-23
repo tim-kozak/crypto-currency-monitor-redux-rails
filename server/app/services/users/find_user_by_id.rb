@@ -7,6 +7,6 @@ class FindUserById
   def call
     id = context.id
     context.user = User.find(id)
-    context.fail! unless context.user
+    context.fail!(message: "FindUserById - couldn't find User with id=#{id}") unless context.user
   end
 end

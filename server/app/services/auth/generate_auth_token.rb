@@ -5,8 +5,10 @@ class GenerateAuthToken
   # @param user
   def call
     user = context.user
-    context.fail! unless user
+    context.fail!(message: "GenerateAuthToken - no user provided") unless user
+
     context.auth_token = JsonWebToken.encode(user_id: user.id)
-    context.fail! unless context.auth_token
+
+    context.fail!(message: "GenerateAuthToken - couldn't generate token") unless context.auth_token
   end
 end

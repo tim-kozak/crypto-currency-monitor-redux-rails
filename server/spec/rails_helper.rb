@@ -6,6 +6,7 @@ require 'database_cleaner'
 require File.expand_path('../config/environment', __dir__)
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/services/**/*.rb')].each { |f| require f }
 
 ENV['RAILS_ENV'] ||= 'test'
 

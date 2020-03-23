@@ -6,6 +6,6 @@ class FindUserByEmail
   def call
     email = context.email
     context.user = User.find_by( email: email)
-    context.fail! unless context.user
+    context.fail!(message: "FindUserByEmail - no such email") unless context.user
   end
 end
