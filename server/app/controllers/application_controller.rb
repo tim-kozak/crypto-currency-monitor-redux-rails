@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
   include Response
   include ExceptionHandler
+  include ErrorResponses
 
   # called before every action on controllers
   before_action :authorize_request
@@ -14,7 +15,7 @@ class ApplicationController < ActionController::API
     if result.success?
       @current_user = result.user
     else
-      raise(ExceptionHandler::MissingToken, Message.missing_token)
+      response_unauthorized_request(result.message)
     end
   end
 end

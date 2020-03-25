@@ -6,11 +6,11 @@ class CheckUserAuthentication
   # @param password
   def call
     user = context.user
-    context.fail!( message: "CheckUserAuthentication - no user provided") unless user
+    context.fail!( message: "No user provided") unless user
 
     password = context.password
-    context.fail!( message: "CheckUserAuthentication - no password provided") unless password
+    context.fail!( message: "No password provided") unless password
 
-    context.fail!( message: "CheckUserAuthentication - invalid credentials") unless user.authenticate(password)
+    context.fail!( message: "Invalid credentials") unless user.authenticate(password)
   end
 end

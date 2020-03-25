@@ -9,7 +9,8 @@ class Api::V1::AuthenticationController < ApplicationController
     if result.success?
       json_response(auth_token: result.auth_token)
     else
-      raise(ExceptionHandler::AuthenticationError, Message.invalid_credentials)
+      error = 'Invalid credentials'
+      response_unauthorized_request(error)
     end
   end
 

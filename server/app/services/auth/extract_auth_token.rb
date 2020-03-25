@@ -6,11 +6,11 @@ class ExtractAuthToken
   # @return auth_token
   def call
     headers = context.headers
-    context.fail!(message: "ExtractAuthToken - no headers passed") unless headers
-    context.fail!(message: "ExtractAuthToken - no Authorization header") unless headers['Authorization'].present?
+    context.fail!(message: "No headers provided") unless headers
+    authorization = headers['Authorization']
+    context.fail!(message: "No Authorization header") unless authorization
 
-    tokens = headers['Authorization'].split(' ')
-    context.auth_token = tokens.size > 1 ? tokens.last : nil
-    context.fail!(message: "ExtractAuthToken - no auth token found") unless context.auth_token
+    context.auth_token = authorization.split(' ').last
+    context.fail!(message: "No auth token provided") unless context.auth_token
   end
 end
