@@ -54,10 +54,23 @@ Server:
 * pg - PostgresSQL connector
 * seeds - demo data generation 
 
-## Running the tests
+## Tests
+
+```
+23 files in total.
+118 relevant lines, 112 lines covered and 6 lines missed. 
+
+Coverage ( 94.92% )
+Controllers - 96.6%
+Models - 100.0%
+Helpers - 100.0%
+Libraries - 69.23%
+Ungrouped - 94.92%
+```
 
 >API part is covered by model and integration tests written using:
 * [RSpec](https://rspec.info/) - Ruby on rails testing framework
+* [SimpleCov](https://github.com/colszowka/simplecov) - Test coverage checker
 * [Shoulda](https://github.com/thoughtbot/shoulda) - Advanced test syntax and format
 * [shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers) - Additional one line matchers syntax    
 * [factory_bot](https://github.com/thoughtbot/factory_bot) - Model factories 
