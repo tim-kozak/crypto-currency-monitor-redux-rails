@@ -12,6 +12,7 @@ gem "puma", ">= 4.3.3"
 
 # Build CMC API wrapper
 gem 'coinmarketcap'
+gem 'faraday'
 
 # Build JSON APIs
 gem 'active_model_serializers', '~> 0.10.10'

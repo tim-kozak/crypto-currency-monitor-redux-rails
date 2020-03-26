@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_02_27_233209) do
 
   create_table "price_changes", force: :cascade do |t|
     t.datetime "day"
+    t.float "price"
     t.bigint "currency_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

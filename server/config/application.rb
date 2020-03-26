@@ -37,5 +37,7 @@ module Api
     #Auto load paths
     config.autoload_paths += Dir["#{config.root}/app/services/**/**/"]
 
+    #Set siqkiq as job processor
+    config.active_job.queue_adapter = :sidekiq
   end
 end
