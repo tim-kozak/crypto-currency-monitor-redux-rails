@@ -34,7 +34,6 @@ services:
     volumes:
       - ./server:/app
       - ./server/Docker/usr/.gemrc:/root/.gemrc
-      - gems-cache:/usr/local/bundle/gems
     networks:
       - app-network
   sidekiq:
@@ -47,11 +46,11 @@ services:
     restart: unless-stopped
     depends_on:
       - db
-      - redis    
+      - redis 
     env_file: .env
     volumes:
       - ./server:/app
-      - gems-cache:/usr/local/bundle/gems
+      - ./server/Docker/usr/.gemrc:/root/.gemrc
     networks:
       - app-network
   db:
@@ -73,7 +72,6 @@ services:
 volumes:
   db-volume:
   redis-volume:
-  gems-cache:
 networks:
   app-network:
     driver: bridge

@@ -27,6 +27,6 @@ WORKDIR $APP_HOME
 EXPOSE 80
 
 CMD mkdir -p tmp/pids && \
-    rails db:migrate && \
-    rake db:seed && \
+    bundle exec rails db:migrate && \
+    bundle exec rake db:seed && \
     bundle exec puma -C config/puma.rb
