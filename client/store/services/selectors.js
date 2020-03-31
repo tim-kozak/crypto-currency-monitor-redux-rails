@@ -110,6 +110,28 @@ export const getPortfolioSetValue =  createSelector( [getCurrencies,getPortfolio
 /**
  * Charts Data
  */
+
+export const getHighchartsHistoricalData = createSelector( [getCurrencies], (currencies) => {
+    let historical = {};
+    currencies.allIds.map(id => {
+        const priceChanges = currencies.byIds[id].price_changes;
+        historical[id] = priceChanges.map( change => ([change.day,change.price]));
+    });
+    return historical;
+});
+
+export const getLastPrices = createSelector( [getHighchartsHistoricalData], (historical) => {
+    let lastPrices = {};
+    for (let [currency, data] of Object.entries(historical)) {
+        const point = data[data.length-1];
+        lastPrices[currency] = {
+            timestamp: point[0],
+            price: point[1]
+        }
+    }
+    return lastPrices;
+});
+
 export const getHighchartsGrouppedAssetsData = createSelector( [getSelectedPortfolio,getCurrencies], (selectedPortfolio, currencies) => {
     return selectedPortfolio.assets.map(asset => {
         const currency = currencies.byIds[asset.currency_id];
@@ -119,20 +141,20 @@ export const getHighchartsGrouppedAssetsData = createSelector( [getSelectedPortf
     });
 });
 
-export const getHighchartsPortfolioData = createSelector( [getCurrencies, getSelectedPortfolio], (currencies, selectedPortfolio) => {
+export const getHighchartsPortfolioData = createSelector( [getCurrencies, getSelectedPortfolio, getHighchartsHistoricalData], (currencies, selectedPortfolio, historical) => {
     let longestHistory = 0;
     let longestHistorycurrency_id = 0;
     let series = selectedPortfolio.assets.map((asset,index) => {
         const currency_id = asset.currency_id;
         const currency = currencies.byIds[currency_id];
-        const historical = currency.historical;
-        if ( historical.length > longestHistory) {
-            longestHistory = historical.length;
+        const data = historical[currency_id];
+        if ( data.length > longestHistory) {
+            longestHistory = data.length;
             longestHistorycurrency_id = currency_id;
         }
         return {
             name: currency.name,
-            data: historical,
+            data: data,
         }
     });
 
@@ -143,16 +165,16 @@ export const getHighchartsPortfolioData = createSelector( [getCurrencies, getSel
         let dayValue = 0;
         selectedPortfolio.assets.map((asset) => {
             const currency_id = asset.currency_id;
-            const historical = currencies.byIds[currency_id].historical;
-            let backIndex = historical.length - i - 1;
+            const data = historical[currency_id];
+            let backIndex = data.length - i - 1;
 
             if (backIndex >= 0) {
-                const price = historical[backIndex][1];
+                const price = data[backIndex][1];
                 dayValue += price * asset.amount;
             }
         });
         const largestBackIndex = longestHistory - 1 - i;
-        const time = currencies.byIds[longestHistorycurrency_id].historical[largestBackIndex][0];
+        const time = historical[longestHistorycurrency_id][largestBackIndex][0];
         const day = [time, dayValue];
         valueSeriesData.unshift(day);
 
@@ -179,14 +201,15 @@ export const getHighchartsPortfolioData = createSelector( [getCurrencies, getSel
     return [yAxis, series,{ timestamp: maxSeriesDay[0], value: maxSeriesDay[1] },{ timestamp: minSeriesDay[0], value: minSeriesDay[1] } ];
 });
 
-export const getMonitorGroupedChartData = createSelector( [getCurrencies], (currencies) => {
+export const getMonitorGroupedChartData = createSelector( [getCurrencies,getHighchartsHistoricalData], (currencies,historical) => {
     return currencies.allIds.map((id,index) => {
         const currency = currencies.byIds[id];
-        const historical = currency.historical;
+        const data = historical[id];
         const slise = 30;
-        const seriesWTime = historical.length > slise ? historical.slice(-slise) : historical;
+        const seriesWTime = data.length > slise ? data.slice(-slise) : data;
         const seriesWOTime = seriesWTime.map(item=>(item[1]));
         return {
+            id: id,
             name: currency.name,
             symbol: currency.symbol,
             price: currency.price,

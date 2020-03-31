@@ -55,7 +55,7 @@ RSpec.describe 'Currencies API', type: :request do
   # Test suite for POST /api/v1/currencies
   describe 'POST /api/v1/currencies' do
     context 'when the request is valid' do
-      let(:valid_attributes) { { name: "Bitcoin", symbol: "BTX", price: 342.5634, last_change: "2020-12-08 11:26:40 -0200" }.to_json }
+      let(:valid_attributes) { { name: "Bitcoin", symbol: "BTX", price: 342.5634 }.to_json }
       before { post '/api/v1/currencies', params: valid_attributes, headers: headers }
 
       it 'creates a currency' do

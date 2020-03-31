@@ -4,7 +4,6 @@ class CreateCurrencies < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :symbol
       t.float :price
-      t.timestamp :last_change
 
       t.timestamps
     end

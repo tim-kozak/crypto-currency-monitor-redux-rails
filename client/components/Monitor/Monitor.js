@@ -6,14 +6,16 @@ import {Loader} from "../common/Loader";
 import {colorForIndex, tintForIndex} from "../../utils/colors";
 
 export const Monitor = (props) => {
-    const {currencies, isLoading} = props;
+    const {currencies, isLoading, prices} = props;
 
     if (isLoading) return <Loader />;
     return (
         <div className={s.monitor}>
             {
                 currencies.map( function(currency,index) {
-                    const {name, symbol, price, series } = currency;
+                    const {id, name, symbol, series } = currency;
+                    debugger;
+                    const price = prices[id].price;
                     return (
                         <div className={s.item}>
                             <h2>{name} <span>({symbol})</span></h2>

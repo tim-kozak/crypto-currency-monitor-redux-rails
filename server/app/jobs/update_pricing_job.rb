@@ -14,28 +14,25 @@ class UpdatePricingJob < ActiveJob::Base
     end.join(',')
 
     begin
-      response = Faraday.get(URL, { symbol: symbols_string}, { 'Accepts' => 'application/json', 'X-CMC_PRO_API_KEY' => KEY })
-    rescue
+      response = Faraday.get(URL, { symbol: symbols_string }, { 'Accepts' => 'application/json', 'X-CMC_PRO_API_KEY' => KEY })
+    rescue StandardError => e
       puts "UpdatePricingJob request error"
+      puts e
       return
     end
 
     prices = JSON.parse(response.body)["data"]
-
     currencies.each do |currency|
       symbol = currency.symbol
-      quote = prices[symbol]["quote"]["USD"]
-      price = quote["price"]
-      puts price
-      change = PriceChange.where({ currency_id: currency.id, created_at: Time.now.midnight..(Time.now.midnight + 1.day) }).first
+      price = prices[symbol]["quote"]["USD"]["price"]
+      change = PriceChange.where({ currency_id: currency.id, day: Time.now.midnight..(Time.now.midnight + 1.day) }).first
       unless change
         change = PriceChange.new( currency_id: currency.id)
       end
-      change.day = DateTime.now
+      change.day = DateTime.now.midday
       change.price = price
       change.save
-
     end
-    
+
   end
 end
