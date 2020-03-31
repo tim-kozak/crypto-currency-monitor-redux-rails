@@ -46,17 +46,15 @@ if Currency.all.size === 0
     #name = Faker::CryptoCoin.unique.coin_name
     # symbol = Faker::CryptoCoin.unique.acronym
 
-    last_price = Faker::Number.decimal(l_digits: 3, r_digits: 4)
-
-    currency = Currency.create!( name: name, symbol: symbol, price: last_price )
+    currency = Currency.create!( name: name, symbol: symbol)
     data.each do |change|
-      day = Time.at(change[0]).midday
+      timestamp = change[0]
+      day = DateTime.strptime(timestamp.to_s,'%s').midday
       price = change[1]
       PriceChange.create!(currency_id: currency.id, day: day, price: price)
     end
     currency
   end
-
   puts "Currencies created"
 
   3.times do

@@ -2,8 +2,7 @@ import {connect} from "react-redux";
 import {PortfolioDetails} from "./PortfolioDetails";
 import {
     getHighchartsGrouppedAssetsData,
-    getHighchartsPortfolioData,
-    getLastUpdatedDate,
+    getHighchartsPortfolioData, getLastUpdated,
     getSelectedPortfolio,
     getSelectedPortfolioSetValue
 } from "../../store/services/selectors";
@@ -13,7 +12,7 @@ import {createAssetThunk, deletePortfolioThunk, updatePortfolioNameThunk} from "
 const mapStateToProps = (state) => {
     const portfolioItem = getSelectedPortfolio(state);
     const portfolioValue = simplePrice(getSelectedPortfolioSetValue(state),1);
-    const lastUpdated = getLastUpdatedDate(state);
+    const lastUpdated = getLastUpdated(state);
     const {currencies} = state;
     const [yAxis,data,maxDay,minDay] = getHighchartsPortfolioData(state);
 

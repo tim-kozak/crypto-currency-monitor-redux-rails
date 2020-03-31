@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './Profile.module.scss'
+import {simpleDate} from "../../utils/decorators";
 
 export const Profile = (props) => {
     const {name,photo} = props.profile;
@@ -12,7 +13,7 @@ export const Profile = (props) => {
             <p>
                 Net worth: <strong>&nbsp;{netWorth}</strong><br/>
                 Assets: <strong>&nbsp;{assetsCount}</strong>
-                <span>last updated: {lastUpdated}</span>
+                <span>last updated: {simpleDate(lastUpdated)}</span>
             </p>
         </div>
     );

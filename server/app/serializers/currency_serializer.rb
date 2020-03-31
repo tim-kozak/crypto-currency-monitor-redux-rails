@@ -1,8 +1,16 @@
 class CurrencySerializer < ActiveModel::Serializer
-  attributes :id, :name, :symbol, :price_changes, :price
+  attributes :id, :name, :symbol, :price_changes, :price, :last_change
 
   def price_changes
     ActiveModelSerializers::SerializableResource.new(object.price_changes,  each_serializer: PriceChangeSerializer)
+  end
+
+  def price
+    object.price
+  end
+
+  def last_change
+    object.last_change_date
   end
 end
 

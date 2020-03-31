@@ -14,7 +14,6 @@ export const Monitor = (props) => {
             {
                 currencies.map( function(currency,index) {
                     const {id, name, symbol, series } = currency;
-                    debugger;
                     const price = prices[id].price;
                     return (
                         <div className={s.item}>

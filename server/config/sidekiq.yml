@@ -1,0 +1,4 @@
+:schedule:
+  updater:
+    every: 15m
+    class: UpdatePricingJob

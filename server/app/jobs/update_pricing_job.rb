@@ -1,4 +1,5 @@
 require 'json'
+require 'sidekiq-scheduler'
 
 class UpdatePricingJob < ActiveJob::Base
   queue_as :default

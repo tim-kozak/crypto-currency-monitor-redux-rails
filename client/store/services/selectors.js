@@ -20,10 +20,6 @@ export const getSelectedPortfolioId = (state) => {
     return state.appState.selectedPortfolioId;
 };
 
-export const getLastUpdatedDate = (state) => {
-    return state.currencies.lastUpdated;
-};
-
 /**
  * Selectors
  */
@@ -115,7 +111,7 @@ export const getHighchartsHistoricalData = createSelector( [getCurrencies], (cur
     let historical = {};
     currencies.allIds.map(id => {
         const priceChanges = currencies.byIds[id].price_changes;
-        historical[id] = priceChanges.map( change => ([change.day,change.price]));
+        historical[id] = priceChanges.map( change => ([change.timestamp,change.price]));
     });
     return historical;
 });
@@ -130,6 +126,15 @@ export const getLastPrices = createSelector( [getHighchartsHistoricalData], (his
         }
     }
     return lastPrices;
+});
+
+export const getLastUpdated = createSelector( [getHighchartsHistoricalData], (historical) => {
+    let lastPrices = {};
+    for (let [currency, data] of Object.entries(historical)) {
+        const point = data[data.length-1];
+        return new Date(point[0]);
+    }
+    return null;
 });
 
 export const getHighchartsGrouppedAssetsData = createSelector( [getSelectedPortfolio,getCurrencies], (selectedPortfolio, currencies) => {

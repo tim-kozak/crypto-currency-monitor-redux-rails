@@ -63,7 +63,6 @@ export const PortfolioChart = (props) => {
             shared: true,
             split: false,
             pointFormatter: function (point) {
-                // debugger;
                 return '<span style="color:' + this.color + '">●</span> ' + this.series.name + ': <b>' + simplePrice(this.y) + '</b><br/>';
             }
         },

@@ -14,7 +14,7 @@ export const AssetsPerformance = (props) => {
                 <li>
                     <h5>Current Set Value</h5>
                     <strong>{value}</strong>
-                    <span>last updated: {lastUpdated}</span>
+                    <span>last updated: {simpleDate(lastUpdatedd)}</span>
                 </li>
                 <li>
                     <h5>Maximum value</h5>

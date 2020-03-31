@@ -42,7 +42,7 @@ class Api::V1::CurrenciesController < ApplicationController
 
   def currency_params
     # whitelist params
-    params.permit(:name, :symbol, :price )
+    params.permit(:name, :symbol )
   end
 
   def set_currency
