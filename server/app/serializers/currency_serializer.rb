@@ -10,7 +10,7 @@ class CurrencySerializer < ActiveModel::Serializer
   end
 
   def last_change
-    object.last_change_date
+    object.last_change.to_datetime.strftime("%Q").to_i
   end
 end
 

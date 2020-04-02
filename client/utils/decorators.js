@@ -15,7 +15,15 @@ export const simplePercentage = (value, precision = 2) => {
 };
 
 export const simpleDate = (value) => {
-    const dateString = moment(value).format('ll');
-    return dateString;
+    const date = moment(value);
+    const now = moment(new Date());
+    const diff = now.diff(date, 'days')
+        if (diff > 7 ) {
+        return date.calendar(null, {
+            sameElse: 'll'
+        });
+    } else {
+        return date.fromNow();
+    }
 };
 

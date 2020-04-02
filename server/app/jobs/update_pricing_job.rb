@@ -33,6 +33,9 @@ class UpdatePricingJob < ActiveJob::Base
       change.day = DateTime.now.midday
       change.price = price
       change.save
+
+      currency.last_change = DateTime.now
+      currency.save
     end
 
   end

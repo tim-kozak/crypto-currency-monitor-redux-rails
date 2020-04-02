@@ -128,13 +128,10 @@ export const getLastPrices = createSelector( [getHighchartsHistoricalData], (his
     return lastPrices;
 });
 
-export const getLastUpdated = createSelector( [getHighchartsHistoricalData], (historical) => {
-    let lastPrices = {};
-    for (let [currency, data] of Object.entries(historical)) {
-        const point = data[data.length-1];
-        return new Date(point[0]);
+export const getLastUpdated = createSelector( [getCurrencies], (currencies) => {
+    for (let [id, currency] of Object.entries(currencies.byIds)) {
+        return currency["last_change"];
     }
-    return null;
 });
 
 export const getHighchartsGrouppedAssetsData = createSelector( [getSelectedPortfolio,getCurrencies], (selectedPortfolio, currencies) => {

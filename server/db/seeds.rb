@@ -46,7 +46,7 @@ if Currency.all.size === 0
     #name = Faker::CryptoCoin.unique.coin_name
     # symbol = Faker::CryptoCoin.unique.acronym
 
-    currency = Currency.create!( name: name, symbol: symbol)
+    currency = Currency.create!( name: name, symbol: symbol, last_change: DateTime.now)
     data.each do |change|
       timestamp = change[0]
       day = DateTime.strptime(timestamp.to_s,'%s').midday
