@@ -1,6 +1,6 @@
 class Currency < ApplicationRecord
   has_many :assets, dependent: :destroy
-  has_many :price_changes, -> { order('day DESC') }, dependent: :destroy
+  has_many :price_changes, -> { order "day ASC" }, dependent: :destroy
   validates_presence_of :name, :symbol, :last_change
 
   def price
