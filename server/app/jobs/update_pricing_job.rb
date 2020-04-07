@@ -30,11 +30,11 @@ class UpdatePricingJob < ActiveJob::Base
       unless change
         change = PriceChange.new( currency_id: currency.id)
       end
-      change.day = DateTime.now.midday
+      change.day = DateTime.now
       change.price = price
       change.save
 
-      currency.last_change = DateTime.now
+      currency.last_change = change.day
       currency.save
     end
 

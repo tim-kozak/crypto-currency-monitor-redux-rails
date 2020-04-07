@@ -49,7 +49,7 @@ if Currency.all.size === 0
     currency = Currency.create!( name: name, symbol: symbol, last_change: DateTime.now)
     data.each do |change|
       timestamp = change[0]
-      day = DateTime.strptime(timestamp.to_s,'%s').midday
+      day = DateTime.strptime(timestamp.to_s,'%s')
       price = change[1]
       PriceChange.create!(currency_id: currency.id, day: day, price: price)
     end
