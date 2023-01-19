@@ -72,7 +72,7 @@ GEM
     coinmarketcap (0.3.0)
       httparty
       nokogiri
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.10)
     connection_pool (2.2.2)
     crass (1.0.6)
     database_cleaner (1.8.3)
@@ -98,12 +98,12 @@ GEM
     fugit (1.3.3)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.1)
-    globalid (0.4.2)
-      activesupport (>= 4.2.0)
+    globalid (1.0.1)
+      activesupport (>= 5.0)
     httparty (0.18.0)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
-    i18n (1.8.2)
+    i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     interactor (3.1.2)
     json-schema (2.8.1)
@@ -128,7 +128,7 @@ GEM
     mimemagic (0.3.4)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.14.0)
+    minitest (5.17.0)
     msgpack (1.3.3)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
@@ -251,12 +251,12 @@ GEM
     thread_safe (0.3.6)
     thwait (0.1.0)
     tilt (2.0.10)
-    tzinfo (1.2.6)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
-    zeitwerk (2.3.0)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   ruby
